@@ -5,7 +5,7 @@ const admin = require("firebase-admin");
 // Firebaseのデフォルトアプリを初期化する
 admin.initializeApp();
 
-const newRoomWebhookUrl = "ここにウェブフックのURLが入ります";
+const channelWebhookUrl = "ここにウェブフックのURLが入ります";
 
 exports.sendDiscordNotification = functions.firestore
   .document("messages/{messageId}")
@@ -18,7 +18,7 @@ exports.sendDiscordNotification = functions.firestore
     const messageData = await messageDoc.data();
     const message = `新しい通知: ${messageData.content}`;
 
-    await fetch(newRoomWebhookUrl, {
+    await fetch(channelWebhookUrl, {
       method: "POST",
       headers: {
         Accept: "application/json",
